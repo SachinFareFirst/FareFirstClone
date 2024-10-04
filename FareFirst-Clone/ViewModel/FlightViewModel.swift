@@ -3,10 +3,13 @@ import Foundation
 import SwiftUI
 
 class FlightViewModel : ObservableObject {
-
+    
+    static let shared = FlightViewModel()
+    
     @Published var path = NavigationPath()
     @Published var sliderValue = 0.0
     @Published var passengerClass = ["Economy", "Premium Economy","Business", "First Class" ]
+    @Published var ways = ["One way", "Two way", "Multi city"]
     @Published  var adult = 1
     @Published  var children : Int = 0
     @Published  var infants : Int = 0
@@ -20,20 +23,17 @@ class FlightViewModel : ObservableObject {
     @Published var twoWayResult  = [TwoWayResult]()
     @Published var locationData : [LocationModel] = []
     @Published var isLoading = false
-    @Published var showAlert = false
-//    @Published var departureDate : String?
-//    @Published var returnDate : String?
-//    func fetchLocationDetail(query : String) {
-//        APIServices.shared.fetchLocationDetail(querry: query)
-//    }
+    @Published var homescreenSearchAlert = false    
+    @Published var resultsAlert = false
+    @Published var toastText = false
     
     func changeSelectedPlaces() {
         let temp = fromLocation
         fromLocation = toLocation
         toLocation = temp
     }
-
- 
+    
+    
     var totalPassengers : Int {
         
         return adult+children+infants
@@ -41,37 +41,72 @@ class FlightViewModel : ObservableObject {
     
     
     func getCount (stringValue : String) -> Int {
-        if stringValue == "Adult" {
+        if stringValue == Constants.PopUpPage.adult {
             
             return adult
         }
-        if stringValue == "Children" {
+        if stringValue == Constants.PopUpPage.children {
             return children
         }
-        if stringValue == "Infant" {
+        if stringValue == Constants.PopUpPage.infant {
             return infants
         }
         return 0
     }
     
+    func disablePlusButton(stringValue : String) -> Bool {
+        if stringValue == Constants.PopUpPage.adult {
+            if totalPassengers == 9 {
+                return true
+            }
+        }
+        else if stringValue == Constants.PopUpPage.children {
+            if totalPassengers == 9 {
+                return true
+            }
+        }
+        else if stringValue == Constants.PopUpPage.infant {
+            if totalPassengers == 9 {
+                return true
+            }
+            else {
+                if infants >= adult {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
     func disableMinusButton (stringValue : String) -> Bool {
-        if stringValue == "Adult" {
+        if stringValue == Constants.PopUpPage.adult {
             if adult == 1 {
                 return true
             }
         }
-        else if stringValue == "Children" {
+        else if stringValue == Constants.PopUpPage.children {
             if children == 0 {
                 return true
             }
         }
-        else if stringValue == "Infant" {
+        else if stringValue == Constants.PopUpPage.infant {
             if infants == 0 {
                 return true
             }
         }
         return false
     }
-
+    
+    func alertText() -> some View {
+        if fromLocation.iataCode == toLocation.iataCode {
+            return Text("Departure and arrival airports must be different")
+        }
+        else if deparatureDate > returnDate{
+            return Text("Return Date Error")
+        }
+        else {
+            return Text("Result Not Found")
+        }
+    }
 }
 

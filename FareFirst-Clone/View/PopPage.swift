@@ -7,6 +7,7 @@ struct PopPage: View {
     var year : String
     
     
+    
     var body: some View {
         
         HStack {
@@ -24,16 +25,16 @@ struct PopPage: View {
             HStack {
                 Spacer()
                 Button {
-                    
+                    if flightViewModel.totalPassengers < 10 {
+                        flightViewModel.toastText = false
+                    }
+                    print("flight",flightViewModel.totalPassengers)
                     minusButton()
                 } label: {
-                    Image(systemName: "minus"
-                    ).bold()
-                        .padding(20)
-                        .frame(maxWidth: 30,maxHeight: 30)
-                        .background(.clear)
-                        .border(Color.blue)
-                        .bold()
+                    Image(systemName: Constants.Images.minus_sign
+                    )
+                    .resizable()
+                    .frame(width: 30,height: 30)
                     
                 }.disabled(flightViewModel.disableMinusButton(stringValue: passengers)).frame(maxWidth: .infinity)
                 
@@ -47,19 +48,20 @@ struct PopPage: View {
                 Spacer()
                 
                 Button {
-                    
+                    if flightViewModel.totalPassengers == 8 {
+                        flightViewModel.toastText = true
+                    }
+                 
                     plusButton()
                     
                 } label: {
-                    Image(systemName: "plus")
-                        .padding(20)
-                        .frame(maxWidth: 30,maxHeight: 30)
-                        .background(.clear)
-                        .border(Color.blue)
-                        .bold()
+                    Image(systemName: Constants.Images.plus_sign)
+                        .resizable()
+                        .frame(width: 30,height: 30)
+                    
                     
                 }
-                .disabled((flightViewModel.totalPassengers == 9))
+                .disabled((flightViewModel.disablePlusButton(stringValue: passengers)))
                 .frame(maxWidth: .infinity)
             }.frame(maxWidth: 200)
             
@@ -69,17 +71,17 @@ struct PopPage: View {
     }
     
     func plusButton() {
-        if passengers == "Adult"{
+        if passengers == Constants.PopUpPage.adult{
             print(flightViewModel.adult)
             flightViewModel.adult += 1
             
         }
         
-        if passengers == "Children"{
+        if passengers == Constants.PopUpPage.children{
             flightViewModel.children += 1
             
         }
-        if passengers == "Infant"{
+        if passengers == Constants.PopUpPage.infant{
             
             if flightViewModel.adult > flightViewModel.infants{
                 print(flightViewModel.infants)
@@ -89,16 +91,21 @@ struct PopPage: View {
         }
     }
     func minusButton() {
-        if passengers == "Adult"{
+        if passengers == Constants.PopUpPage.adult{
             flightViewModel.adult -= 1
+            if flightViewModel.infants >= flightViewModel.adult{
+                //print("gg",flightViewModel.infants)
+                flightViewModel.infants -= 1
+            }
         }
         
-        if passengers == "Children"{
+        if passengers == Constants.PopUpPage.children{
             flightViewModel.children -= 1
             
         }
-        if passengers == "Infant"{
-            print(flightViewModel.infants)
+        
+        if passengers == Constants.PopUpPage.infant{
+            //print(flightViewModel.infants)
             flightViewModel.infants -= 1
             
         }

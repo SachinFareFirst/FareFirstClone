@@ -10,7 +10,9 @@ import SwiftUI
 struct Location: View {
     @EnvironmentObject var flightViewModel : FlightViewModel
   
-
+//    let newGesture = TapGesture().onEnded { _ in
+//        
+//    }
     
     
     var body: some View {
@@ -25,9 +27,10 @@ struct Location: View {
                 }
                 .foregroundStyle(Color.white)
             }
+            //.simultaneous
             
             Spacer()
-            Image(systemName: "arrow.left.arrow.right")
+            Image(systemName: Constants.Images.swap_arrow)
                 .resizable()
                 .frame(width: 20, height: 20)
                 .padding()

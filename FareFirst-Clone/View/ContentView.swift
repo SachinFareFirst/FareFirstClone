@@ -7,19 +7,25 @@
 
 import SwiftUI
 import WebKit
+import UIKit
 struct ContentView: View {
     @State var selected = "Flights"
     
     
     //@StateObject var flightViewModel : FlightViewModel = FlightViewModel()
-    @StateObject var flightViewModel : FlightViewModel = FlightViewModel()
+    
     @StateObject var resultScreenManager : ResultScreenManager = ResultScreenManager()
-    @State var showWebView = false
+    @StateObject var flightViewModel = FlightViewModel.shared
+    
     var body : some View {
         
         TabView {
             NavigationStack(path: $flightViewModel.path) {
                 HomeScreen()
+                    .onAppear(perform: {
+                        print( Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String as Any )
+                        print( Bundle.main.infoDictionary?["CFBundleVersion"] as? String)
+                    })
                     .environmentObject(flightViewModel).environmentObject(resultScreenManager)
                     .navigationDestination(for: NavigationDestions.self) {
                         screen in
@@ -34,12 +40,8 @@ struct ContentView: View {
             
             
             NavigationStack {
-                
-               
                     WebView(url: "https://www.farefirst.com/hotels")
-                
-                //self.showWebView.toggle()
-                
+
             }
             .tabItem {
             Text("Hotel")

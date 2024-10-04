@@ -9,12 +9,9 @@ import SwiftUI
 
 
 struct DateAndTraveller: View {
-    //@StateObject var flightViewModel : FlightViewModel = FlightViewModel()
     @EnvironmentObject var flightViewModel : FlightViewModel
-    
-    //@Binding var mode:Int
     @Binding var showPop : Bool
-    @State private var calenderId = 0
+    @State private var calenderId = UUID()
     
     
     var oneYear : Date {
@@ -28,26 +25,38 @@ struct DateAndTraveller: View {
                     Deparature()
                         .overlay (
                             DatePicker("", selection: $flightViewModel.deparatureDate, in: Date.now...oneYear, displayedComponents: [.date])
+                                .id(calenderId)
+                                .onChange(of: flightViewModel.deparatureDate, perform: { _ in
+                                    calenderId = UUID()
+                                })
                                 .blendMode(.destinationOver)
-                                .padding(.trailing,30)
-                                .datePickerStyle(.compact).scaleEffect(x: 1.56,y: 2.8))
+                                .padding(.trailing,35)
+                                .datePickerStyle(.compact).scaleEffect(x: 1.6,y: 2.8))
                     
                     Divider()
                     
-                    if flightViewModel.trip == 0{
-                        Return().onTapGesture(perform: {
+                    if flightViewModel.trip == 0 {
+                        Return()
+                            .onTapGesture(perform: {
                             flightViewModel.trip = 1
                         })
                     }
                     else{
-                        Return()
+                        Return() 
+
                             .overlay (
                             DatePicker("", selection: $flightViewModel.returnDate, in: flightViewModel.deparatureDate..., displayedComponents: [.date])
+                                
+                                .id(calenderId)
+                                .onChange(of: flightViewModel.returnDate, perform: { _ in
+                                    calenderId = UUID()
+                                })
                                 .blendMode(.destinationOver)
+                                .padding(.trailing,40).frame(maxWidth: .infinity)
                                 .datePickerStyle(.compact)
                                 .scaleEffect(x: 1.6,y: 2.8)
                         )
-                        .padding(.trailing,35)
+                        
                     }
                     
                     
@@ -59,7 +68,6 @@ struct DateAndTraveller: View {
                 HStack {
                     
                     HStack {
-                        //Spacer()
                         VStack(alignment: .leading){
                             Text("Traveller")
                                 .padding(.bottom,1)
@@ -70,56 +78,29 @@ struct DateAndTraveller: View {
                             HStack {
                                   travelerDetails().minimumScaleFactor(0.5)
                                   .lineLimit(2)
-//                                Group {
-//                                    if flightViewModel.adult == 1 {
-//                                        Text("\(flightViewModel.adult) Adult")
-//                                    }
-//                                    else
-//                                    {
-//                                        Text("\(flightViewModel.adult) Adults")
-//                                    }
-//                                    
-//                                    if flightViewModel.children != 0 {
-//                                        if flightViewModel.children == 1{
-//                                            Text("\(flightViewModel.children) Child")
-//                                        }
-//                                        else {
-//                                            Text("\(flightViewModel.children) Children")
-//                                        }
-//                                        //
-//                                    }
-//                                    if flightViewModel.infants != 0 {
-//                                        if flightViewModel.children == 1{
-//                                            Text("\(flightViewModel.infants) Infant")
-//                                        }
-//                                        else {
-//                                            Text("\(flightViewModel.infants) Infants")
-//                                        }
-//                                        
-//                                    }
-//                                    
-//                                }
                             }
                             .font(.system(size: 15)).bold()
                         }
                         Spacer()
                     }.frame(maxWidth: .infinity)
                     
-                        .padding(.leading,40)
+                        .padding(.leading,20)
                     
                     Divider()
                     HStack {
-                        // Spacer()
                         VStack(alignment: .leading){
                             Text("Class").padding(.bottom,1)
                                 .font(.headline)
                                 .textCase(.uppercase)
                                 .foregroundStyle(Color.gray)
-                            Text("\(flightViewModel.passengerClass[Int(flightViewModel.sliderValue)])").minimumScaleFactor(0.7).font(.system(size: 15)).bold()
+                            Text("\(flightViewModel.passengerClass[Int(flightViewModel.sliderValue)])")
+                                .minimumScaleFactor(0.7)
+                                .font(.system(size: 15))
+                                .bold()
                         }
                         Spacer()
                         
-                    }.padding(.leading,30)
+                    }.padding(.leading)
                         .frame(maxWidth: .infinity)
                 }
                 .frame(height: 70)
@@ -144,7 +125,7 @@ struct DateAndTraveller: View {
         var result = ""
         
         if adult == 1 {
-            result = result + "\(adult) Adult"
+            result = result + "\(adult) \(Constants.PopUpPage.adult)"
         }
         else{
             result = result + "\(adult) Adults"
@@ -155,12 +136,12 @@ struct DateAndTraveller: View {
                 result = result + ", \(children) Child"
             }
             else{
-                result = result + ", \(children) Children"
+                result = result + ", \(children) \(Constants.PopUpPage.children)"
             }
         }
         if infant != 0 {
             if infant==1 {
-                result = result + ", \(infant) Infant"
+                result = result + ", \(infant) \(Constants.PopUpPage.infant)"
             }
             else{
                 result = result + ", \(infant) Infants"
@@ -202,7 +183,7 @@ struct Deparature: View {
                     }.frame(maxWidth: .infinity)
                     //.border(Color.black)
                 }
-            }.padding(.leading,40)
+            }.padding(.leading,20)
                 .frame(maxWidth: .infinity)
             //.border(Color.black)
         }.frame(maxWidth: .infinity)
@@ -219,16 +200,17 @@ struct Return: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading){
+                
                 Text("Return")
                     .padding(.bottom,1)
                     .font(.system(size: 15)).bold()
                     .textCase(.uppercase)
                     .foregroundStyle(Color.gray)
-                //.frame(maxWidth: .infinity)
                 HStack {
                     Text(flightViewModel.returnDate.formatted(.dateTime.day(.twoDigits)))
                         .font(.system(size: 40))
                         .foregroundStyle(Color.init(red: 0, green: 0, blue: 255))
+                    
                     VStack(alignment: .leading) {
                         Text(flightViewModel.returnDate.formatted(.dateTime.month()))
                             .font(.system(size: 20))
@@ -236,13 +218,11 @@ struct Return: View {
                         Text(flightViewModel.returnDate.formatted(.dateTime.weekday(Date.FormatStyle.Symbol.Weekday.wide)))
                             .font(.system(size: 15))
                     }.frame(maxWidth: .infinity)
-                    
                 }
-                
-            } .padding(.leading,30)
+            }.padding(.leading)
                 .frame(maxWidth: .infinity)
-        }.frame(maxWidth: .infinity)
-            .opacity(flightViewModel.trip ==  0 ? 0.4 : 1)
+        }.frame(maxWidth: .infinity).frame(maxWidth: .infinity)
+            .opacity(flightViewModel.trip ==  0 ? 0.5 : 1)
     }
 }
 

@@ -8,51 +8,52 @@
 import Foundation
 
 class ResultScreenManager : ObservableObject {
-    
-    
+
     var flightViewModel : FlightViewModel = FlightViewModel()
+
     private var searchResultUrl : String = ""
     
-     var departureDate : String {
+    var departureDate : String {
         let day =  flightViewModel.deparatureDate.formatted(.dateTime.day(.twoDigits))
         let month =  flightViewModel.deparatureDate.formatted(.dateTime.month(.twoDigits))
         let year = flightViewModel.deparatureDate.formatted(.dateTime.year())
         let  departureDate = "\(year)-\(month)-\(day)"
         return departureDate
-    } 
-     var returnDate : String {
+    }
+    var returnDate : String {
         let day =  flightViewModel.returnDate.formatted(.dateTime.day(.twoDigits))
         let month =  flightViewModel.returnDate.formatted(.dateTime.month(.twoDigits ))
         let year = flightViewModel.returnDate.formatted(.dateTime.year())
         let returnDate = "\(year)-\(month)-\(day)"
         return returnDate
-    }
-    
-    private var locationSearch  = "https://funapiproxy-4mqabsrzhq-uc.a.run.app/autocomplete?key=0&locale=en&types[][=city&types[]=airport"
-    
-    func fetchLocationDetail(querry: String) {
-        print("fetched")
-        
-        let urlString = "\(locationSearch)&term=\(querry)"
-        print("url",urlString)
-        if let url = URL(string: urlString) {
-            let session = URLSession.shared
-            let task = session.dataTask(with: url) { (data, respose, error) in
-                if error != nil {
-                    print(error?.localizedDescription ?? "error")
-                    return
-                }
-                if let safeData = data {
-                     print(String(data: safeData, encoding: .utf8)!)
-                    if let locations = self.parseJsonForLocationDetail(decodingData : safeData) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)  {
-                            self.flightViewModel.locationData = locations
+    }  
+    func fetchLocationDetail(searchString: String) {
+        let endpoint = "/autocomplete/"
+        let querryParameter : [String : Any] =  [
+            "key" : 0,
+            "locale" : "en",
+            "types[]" : "city",
+            "term" : searchString
+        ]
+        if let requestURL = Constants.createUrl(endpoint: endpoint,querryParameter: querryParameter) {
+            let url = requestURL
+            print("url",url)
+                let session = URLSession.shared
+                let task = session.dataTask(with: url) { (data, respose, error) in
+                    if error != nil {
+                        print(error?.localizedDescription ?? "error")
+                        return
+                    }
+                    if let safeData = data {
+                        //print(String(data: safeData, encoding: .utf8)!)
+                        if let locations = self.parseJsonForLocationDetail(decodingData : safeData) {
+                            DispatchQueue.main.async  {
+                                self.flightViewModel.locationData = locations
+                            }
                         }
-                       
                     }
                 }
-            }
-            task.resume()
+                task.resume()
         }
     }
     private func parseJsonForLocationDetail(decodingData locationData : Data) -> [LocationModel]? {
@@ -62,9 +63,13 @@ class ResultScreenManager : ObservableObject {
             return decodedData
         }
         catch {
+            DispatchQueue.main.async {
+                self.flightViewModel.resultsAlert.toggle()
+            }
+            
+            print(error.localizedDescription)
             return nil
         }
-        
     }
     
     
@@ -73,54 +78,82 @@ class ResultScreenManager : ObservableObject {
             return ""
         }
         if flightViewModel.trip == 0 {
-            let oneWayUrl = "https://funapiproxy-4mqabsrzhq-uc.a.run.app/flights?key=1&from=\(from)&to=\(to)&departureDate=\(departureDate)&client=bixby&locale=IN"
-            searchResultUrl = oneWayUrl
+            let endpoint = "/flights/"
+            let querryParameter : [String : Any] =  [
+                "key" : 0,
+                "from" : from,
+                "to" : to,
+                "departureDate" : departureDate,
+                "client" : "bixby",
+                "locale" : "IN"
+            ]
+            if let oneWayUrl = Constants.createUrl(endpoint: endpoint,querryParameter: querryParameter) {
+                searchResultUrl = String(describing: oneWayUrl)
+            }
         }
         else if flightViewModel.trip == 1 {
-            let twoWayUrl = "https://funapiproxy-4mqabsrzhq-uc.a.run.app/flights?key=0&from=\(from)&to=\(to)&departureDate=\(departureDate)&returnDate=\(returnDate)&client=bixby&locale=IN"
-            //print(twoWayUrl)
-            searchResultUrl = twoWayUrl
+            let endpoint = "/flights/"
+            let querryParameter : [String : Any] =  [
+                "key" : 0,
+                "from" : from,
+                "to" : to,
+                "departureDate" : departureDate,
+                "returnDate" : returnDate,
+                "client" : "bixby",
+                "locale" : "IN"
+            ]
+
+            if let twoWayUrl = Constants.createUrl(endpoint: endpoint,querryParameter: querryParameter) {
+                searchResultUrl = String(describing: twoWayUrl)
+            }
         }
-        //print("search url",searchResultUrl)
+        print("search url",searchResultUrl)
         return searchResultUrl
     }
     
     
-    func searchResult() {
-       
-      print("current date",departureDate)
+    func searchResult()  {
         flightViewModel.isLoading = true
-            if let url = URL(string: OneWayUrl) {
-                print("url sesion",url)
-                let session = URLSession.shared
-                let task = session.dataTask(with: url) { (data, respose, error) in
+        if let url = URL(string: OneWayUrl) {
+           // print("url sesion",url)
+            let session = URLSession.shared
+            let task = session.dataTask(with: url) { (data, respose, error) in
+                if error != nil {
+                    print("got somne ee")
+                    return
+                }
+                print("intermnediate")
+                if let safeData = data {
                     
-                    if error != nil {
-                        print("got somne ee")
-                        return
+                    if self.flightViewModel.trip == 0 {
+                        print(String(data: safeData, encoding: .utf8)!)
+                        self.oneWayNullCheck(safeData: safeData)
                     }
-                    print("intermnediate")
-                    if let safeData = data {
-                        
-                        if self.flightViewModel.trip == 0 {
-                           print(String(data: safeData, encoding: .utf8)!)
-                            self.oneWayNullCheck(safeData: safeData)
-                        }
-                        else {
-                           // print(String(data: safeData, encoding: .utf8)!)
-                            self.twoWayNullCheck(safeData: safeData)
-                        }
+                    else {
+                        // print(String(data: safeData, encoding: .utf8)!)
+                        self.twoWayNullCheck(safeData: safeData)
                     }
                 }
-                task.resume()
+            }
+            task.resume()
+        }
+        else {
+            print("error")
+            DispatchQueue.main.async {
+                self.flightViewModel.resultsAlert.toggle()
+            }
         }
     }
-     func parseJsonForSearchResult(decodingData oneWaySearchResult : Data) -> OneWaySearchResultModel? {
+    func parseJsonForSearchResult(decodingData oneWaySearchResult : Data) -> OneWaySearchResultModel? {
         do {
             let decodedData = try JSONDecoder().decode(OneWaySearchResultModel.self, from: oneWaySearchResult)
             return decodedData
         }
         catch {
+            DispatchQueue.main.async {
+                self.flightViewModel.resultsAlert.toggle()
+            }
+            
             print("date",error.localizedDescription)
             return nil
         }
@@ -132,6 +165,9 @@ class ResultScreenManager : ObservableObject {
             return decodedData
         }
         catch {
+            DispatchQueue.main.async {
+                self.flightViewModel.resultsAlert.toggle()
+            }
             print("date",error.localizedDescription)
             return nil
         }
@@ -161,7 +197,7 @@ class ResultScreenManager : ObservableObject {
                 return true
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() ) {
+            DispatchQueue.main.async {
                 self.flightViewModel.isLoading = false
                 self.flightViewModel.oneWayResult =  temp
                 print("abcd",self.flightViewModel.oneWayResult.count)
@@ -173,7 +209,7 @@ class ResultScreenManager : ObservableObject {
         if let searchResult = self.parseJsonForTwoWaySearch(decodingData : safeData) {
             let temp = searchResult.results.filter{ results in
                 guard let _ = results.price?.amount,
-                 let _ = results.price?.symbol,
+                      let _ = results.price?.symbol,
                       let _ = results.gate?.name,
                       let _ = results.totalStops,
                       let _ = results.total_duration?.h,
@@ -194,7 +230,7 @@ class ResultScreenManager : ObservableObject {
                 return true
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.async {
                 self.flightViewModel.isLoading = false
                 self.flightViewModel.twoWayResult =  temp
                 print("abcd",self.flightViewModel.oneWayResult.count)
@@ -203,7 +239,7 @@ class ResultScreenManager : ObservableObject {
         }
         
     }
-  
-
+    
+    
     
 }

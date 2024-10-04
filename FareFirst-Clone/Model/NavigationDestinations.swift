@@ -9,32 +9,35 @@ enum NavigationDestions : String , CaseIterable , Hashable ,View {
     case To
     case OneWaySearchButton
     case TwoWaySearchButton
+    case WebViewLink
     
     var body: some View {
         switch self {
-        case .From :FromAndToLocation(From: "Origin")//.environmentObject(locationViewModel)
-                .navigationTitle("Origin")
+        case .From :FromAndToLocation(From: Constants.TitleBar.origin)//.environmentObject(locationViewModel)
+                .navigationTitle(Constants.TitleBar.origin)
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.blue,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar) 
-        case .To  : FromAndToLocation(To: "Destination")//.environmentObject(locationViewModel)
-                .navigationTitle("Destination")
+        case .To  : FromAndToLocation(To: Constants.TitleBar.destination)//.environmentObject(locationViewModel)
+                .navigationTitle(Constants.TitleBar.destination)
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.blue,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
         case .OneWaySearchButton :
             
             OneWaySearch()//.environmentObject(locationViewModel)
-                .navigationTitle("Origin")
+               
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.blue,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
               
         case .TwoWaySearchButton : TwoWaySearch()//.environmentObject(locationViewModel)
-                .navigationTitle("Origin")
+                
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.blue,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
+        case .WebViewLink :
+            WebView(url:"https://www.farefirst.com")
         }
     }
 }
