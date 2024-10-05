@@ -1,16 +1,16 @@
 //
-//  ResultScreenManager.swift
+//  SearchResultManager.swift
 //  FareFirst-Clone
 //
-//  Created by Sachin H K on 26/09/24.
+//  Created by Sachin H K on 05/10/24.
 //
 
 import Foundation
 
-class ResultScreenManager : ObservableObject {
-
-    var flightViewModel : FlightViewModel = FlightViewModel()
-
+class SearchResultManager {
+    
+    static var shared = SearchResultManager()
+    private var flightViewModel = FlightViewModel.shared
     private var searchResultUrl : String = ""
     
     var departureDate : String {
@@ -26,59 +26,14 @@ class ResultScreenManager : ObservableObject {
         let year = flightViewModel.returnDate.formatted(.dateTime.year())
         let returnDate = "\(year)-\(month)-\(day)"
         return returnDate
-    }  
-    func fetchLocationDetail(searchString: String) {
-        let endpoint = "/autocomplete/"
-        let querryParameter : [String : Any] =  [
-            "key" : 0,
-            "locale" : "en",
-            "types[]" : "city",
-            "term" : searchString
-        ]
-        if let requestURL = Constants.createUrl(endpoint: endpoint,querryParameter: querryParameter) {
-            let url = requestURL
-            print("url",url)
-                let session = URLSession.shared
-                let task = session.dataTask(with: url) { (data, respose, error) in
-                    if error != nil {
-                        print(error?.localizedDescription ?? "error")
-                        return
-                    }
-                    if let safeData = data {
-                        //print(String(data: safeData, encoding: .utf8)!)
-                        if let locations = self.parseJsonForLocationDetail(decodingData : safeData) {
-                            DispatchQueue.main.async  {
-                                self.flightViewModel.locationData = locations
-                            }
-                        }
-                    }
-                }
-                task.resume()
-        }
     }
-    private func parseJsonForLocationDetail(decodingData locationData : Data) -> [LocationModel]? {
-        let decoder = JSONDecoder()
-        do {
-            let decodedData = try decoder.decode([LocationModel].self, from: locationData)
-            return decodedData
-        }
-        catch {
-            DispatchQueue.main.async {
-                self.flightViewModel.resultsAlert.toggle()
-            }
-            
-            print(error.localizedDescription)
-            return nil
-        }
-    }
-    
-    
-    var OneWayUrl : String {
+
+    var searchResultURL : String {
         guard let from = flightViewModel.fromLocation.cityName,let to = flightViewModel.toLocation.cityName else {
             return ""
         }
         if flightViewModel.trip == 0 {
-            let endpoint = "/flights/"
+            let endpoint = "/flights"
             let querryParameter : [String : Any] =  [
                 "key" : 0,
                 "from" : from,
@@ -89,10 +44,11 @@ class ResultScreenManager : ObservableObject {
             ]
             if let oneWayUrl = Constants.createUrl(endpoint: endpoint,querryParameter: querryParameter) {
                 searchResultUrl = String(describing: oneWayUrl)
+                print("search Result one way",searchResultUrl)
             }
         }
         else if flightViewModel.trip == 1 {
-            let endpoint = "/flights/"
+            let endpoint = "/flights"
             let querryParameter : [String : Any] =  [
                 "key" : 0,
                 "from" : from,
@@ -107,15 +63,16 @@ class ResultScreenManager : ObservableObject {
                 searchResultUrl = String(describing: twoWayUrl)
             }
         }
-        print("search url",searchResultUrl)
+       
         return searchResultUrl
     }
     
     
     func searchResult()  {
         flightViewModel.isLoading = true
-        if let url = URL(string: OneWayUrl) {
-           // print("url sesion",url)
+        
+        if let url = URL(string: searchResultURL) {
+            print("url",url)
             let session = URLSession.shared
             let task = session.dataTask(with: url) { (data, respose, error) in
                 if error != nil {
@@ -130,7 +87,6 @@ class ResultScreenManager : ObservableObject {
                         self.oneWayNullCheck(safeData: safeData)
                     }
                     else {
-                        // print(String(data: safeData, encoding: .utf8)!)
                         self.twoWayNullCheck(safeData: safeData)
                     }
                 }
@@ -138,7 +94,7 @@ class ResultScreenManager : ObservableObject {
             task.resume()
         }
         else {
-            print("error")
+            print("error search result")
             DispatchQueue.main.async {
                 self.flightViewModel.resultsAlert.toggle()
             }
@@ -176,7 +132,7 @@ class ResultScreenManager : ObservableObject {
     func oneWayNullCheck(safeData  : Data)  {
         if let searchResult = self.parseJsonForSearchResult(decodingData : safeData) {
             print("new value passed")
-            let temp = searchResult.results.filter{ results in
+            let temporaryResult = searchResult.results.filter{ results in
                 guard let _ = results.price?.amount,
                       let _ = results.price?.symbol,
                       let _ = results.from?.iata,
@@ -199,7 +155,7 @@ class ResultScreenManager : ObservableObject {
             
             DispatchQueue.main.async {
                 self.flightViewModel.isLoading = false
-                self.flightViewModel.oneWayResult =  temp
+                self.flightViewModel.oneWayResult =  temporaryResult
                 print("abcd",self.flightViewModel.oneWayResult.count)
             }
         }
@@ -207,7 +163,7 @@ class ResultScreenManager : ObservableObject {
     
     func twoWayNullCheck(safeData  : Data)  {
         if let searchResult = self.parseJsonForTwoWaySearch(decodingData : safeData) {
-            let temp = searchResult.results.filter{ results in
+            let temporaryResult = searchResult.results.filter{ results in
                 guard let _ = results.price?.amount,
                       let _ = results.price?.symbol,
                       let _ = results.gate?.name,
@@ -232,14 +188,11 @@ class ResultScreenManager : ObservableObject {
             
             DispatchQueue.main.async {
                 self.flightViewModel.isLoading = false
-                self.flightViewModel.twoWayResult =  temp
+                self.flightViewModel.twoWayResult =  temporaryResult
                 print("abcd",self.flightViewModel.oneWayResult.count)
                 
             }
         }
         
     }
-    
-    
-    
 }

@@ -10,7 +10,6 @@ import SwiftUI
 struct FromAndToLocation: View {
 
     @EnvironmentObject var flightViewModel : FlightViewModel
-    @EnvironmentObject var resultScreenManager : ResultScreenManager
     @Environment(\.dismiss) private var dismiss
     @State var From : String = ""
     @State var To : String = ""
@@ -29,7 +28,7 @@ struct FromAndToLocation: View {
                             .offset(x:10)
                             .opacity(flightViewModel.searchQuerry.isEmpty ? 0.0 : 1.0)
                             .onTapGesture {
-                                flightViewModel.searchQuerry = ""
+                                flightViewModel.searchQuerry.removeAll()
                             },alignment: .trailing)
                 }.font(.subheadline)
                     .background(RoundedRectangle(cornerRadius: 10.0)
@@ -39,8 +38,8 @@ struct FromAndToLocation: View {
                     .padding()
                 if !flightViewModel.searchQuerry.isEmpty {
                     Button {
-                        flightViewModel.searchQuerry = ""
-                        flightViewModel.locationData = []
+                        flightViewModel.searchQuerry.removeAll()
+                        flightViewModel.locationData.removeAll()
                        
                     }label: {
                         Text("Cancel")
@@ -76,8 +75,8 @@ struct FromAndToLocation: View {
                     }
                     
                     dismiss()
-                    flightViewModel.searchQuerry = ""
-                    flightViewModel.locationData = []
+                        flightViewModel.searchQuerry.removeAll()
+                        flightViewModel.locationData.removeAll()
                    
                 }.padding(.vertical,3)
                     .font(.caption)
@@ -90,7 +89,7 @@ struct FromAndToLocation: View {
         .onChange(of: flightViewModel.searchQuerry) { newValue in
             print("newValue",newValue)
                 if !flightViewModel.searchQuerry.isEmpty {  
-                    resultScreenManager.fetchLocationDetail(searchString: newValue)
+                    flightViewModel.fetchLocationDetail(searchString: newValue)
             }
         }
         

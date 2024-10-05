@@ -10,7 +10,7 @@ import Foundation
 class demoPost {
     
     static let shared = demoPost()
-
+    
     var flightViewModel = FlightViewModel.shared
     
     func userPostRequest(completionHandler : @escaping (PostRequest) -> Void) {
@@ -76,9 +76,23 @@ class demoPost {
             if let error = error{
                 print(error)
             }
-          
+            
         }.resume()
     }
-
+    
+    func flightSearch() -> FlightSearchData {
+        let passenger = Passengers(adult: flightViewModel.adult, children: flightViewModel.children, infant: flightViewModel.infants)
+        
+       let flightSearchData = FlightSearchData(class_type: flightViewModel.passengerClass[Int(flightViewModel.sliderValue)], trip_type:  flightViewModel.ways[flightViewModel.trip], passengers: passenger,  from: flightViewModel.fromLocation.cityName ?? "Mangalore",
+                         to: flightViewModel.toLocation.cityName ?? "Bangalore",  date: String (describing: flightViewModel.deparatureDate), return_date: String (describing: flightViewModel.returnDate))
+        return flightSearchData
+    }
+    
+    func device() -> Device {
+        let device = Device(platform: Constants.UIDevice1.platform, os_version: Constants.UIDevice1.os_version, app_version: "", app_version_code: "", push_token: "", model: Constants.UIDevice1.model, manufacturer: Constants.UIDevice1.manufacturer, model_code: "")
+        return device
+    }
+    
 }
+
 

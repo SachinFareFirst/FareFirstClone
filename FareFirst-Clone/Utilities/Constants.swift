@@ -12,6 +12,10 @@ struct Constants {
 //    static let shared = Constants()
     private init() { }
     
+    struct WebView {
+        static let URL = "https://www.farefirst.com"
+    }
+    
     struct Images{
         static let flight_background = "FlightBackground"
         static let minus_sign = "minus.square"
@@ -23,6 +27,9 @@ struct Constants {
         static let airplane = "airplane"
         static let chevron_backward = "chevron.backward"
         static let default_plane = "defaultPlane"
+        static let hotel = "bed.double.fill"
+        static let nomad = "multiply"
+        static let about = "info.circle"
     }
     
     struct PopUpPage {
@@ -39,6 +46,8 @@ struct Constants {
     struct UIDevice1 {
         static let platform = UIDevice.current.systemName
         static let os_version = UIDevice.current.systemVersion
+        static let model = UIDevice.current.model
+        static let manufacturer = "Apple"
     }
     
     static func createUrl(endpoint : String, querryParameter : [String : Any]) -> URL? {

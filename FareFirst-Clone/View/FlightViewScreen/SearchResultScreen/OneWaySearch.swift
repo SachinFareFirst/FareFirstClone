@@ -12,8 +12,7 @@ struct OneWaySearch : View {
                 .padding()
                 .controlSize(.large)
         }
-       
-
+        
             ScrollView {
                 ForEach(flightViewModel.oneWayResult) {
                     value in
@@ -77,9 +76,6 @@ struct OneWaySearch : View {
             })
             .background(Color(.systemGray3).opacity(0.3))
             .navigationTitle("\(flightViewModel.fromLocation.iataCode ?? "IXE") - \(flightViewModel.toLocation.iataCode ?? "BLR"), \(flightViewModel.deparatureDate.formatted(.dateTime.month().day()))")
-            .toolbarColorScheme(.dark, for: .navigationBar)
-            .toolbarBackground(Color.blue,for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

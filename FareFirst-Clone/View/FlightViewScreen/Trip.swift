@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Trip: View {
     @EnvironmentObject var flightViewModel : FlightViewModel
-    //private let ways = ["One way", "Two way", "Multi city"]
     var body: some View {
         VStack {
             Image(Constants.Images.farefirst_white)

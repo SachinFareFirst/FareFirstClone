@@ -50,11 +50,11 @@ struct TwoWaySearch:View {
                         Spacer()
                         VStack {
                             Divider().frame(width: 80).overlay(.gray)
-                         
-                                HStack {
-                                    Text("\(value.total_duration?.h ?? "00:00 h")h")
-                                    Text("\(value.total_duration?.m ?? "00:00 m")m")
-                                }
+                            
+                            HStack {
+                                Text("\(value.total_duration?.h ?? "00:00 h")h")
+                                Text("\(value.total_duration?.m ?? "00:00 m")m")
+                            }
                             
                         }
                         Spacer()
@@ -99,12 +99,10 @@ struct TwoWaySearch:View {
                         
                     }.padding(.all,5)
                 }.background(RoundedRectangle(cornerRadius: 10).fill(Color(.systemBackground)))
-                //.border(Color.black)
                     .padding(.all,10)
-                   // .shadow(radius: 1)
             }
             
-        } 
+        }
         .alert("Error", isPresented: $flightViewModel.resultsAlert, actions: {
             Button("Ok") {
                 flightViewModel.path.removeLast()
@@ -115,28 +113,21 @@ struct TwoWaySearch:View {
         })
         .background(Color(.systemGray3).opacity(0.3))
         .navigationTitle("\(flightViewModel.fromLocation.iataCode ?? "IXE") - \(flightViewModel.toLocation.iataCode ?? "BLR"), \(flightViewModel.deparatureDate.formatted(.dateTime.month().day())) - \(flightViewModel.returnDate.formatted(.dateTime.month().day()))")
-            .toolbarColorScheme(.dark, for: .navigationBar)
-            .toolbarBackground(Color.blue,for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        flightViewModel.twoWayResult = []
-                        dismiss()
-                    }) {
-                        Image(systemName: Constants.Images.chevron_backward).bold()
-                        Text("Back")
-                    }
-                    
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: {
+                    flightViewModel.twoWayResult = []
+                    dismiss()
+                }) {
+                    Image(systemName: Constants.Images.chevron_backward).bold()
+                    Text("Back")
                 }
+                
             }
+        }
         
     }
     
 }
-//    }
-//}
-//#Preview {
-//    TwoWaySearch(flightViewModel: FlightViewModel())
-//}
+

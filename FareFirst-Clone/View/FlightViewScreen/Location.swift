@@ -10,11 +10,6 @@ import SwiftUI
 struct Location: View {
     @EnvironmentObject var flightViewModel : FlightViewModel
   
-//    let newGesture = TapGesture().onEnded { _ in
-//        
-//    }
-    
-    
     var body: some View {
         HStack {
             Spacer()
@@ -44,7 +39,7 @@ struct Location: View {
             
             Spacer()
             
-            NavigationLink(value:NavigationDestions.To) {
+            NavigationLink( value: NavigationDestions.To) {
                 VStack {
                     Text(" To ") .frame(maxWidth: .infinity)
                     Text(flightViewModel.toLocation.iataCode ?? "iataCode").font(.largeTitle).bold()

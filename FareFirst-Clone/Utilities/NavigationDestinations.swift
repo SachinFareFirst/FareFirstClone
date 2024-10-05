@@ -13,26 +13,24 @@ enum NavigationDestions : String , CaseIterable , Hashable ,View {
     
     var body: some View {
         switch self {
-        case .From :FromAndToLocation(From: Constants.TitleBar.origin)//.environmentObject(locationViewModel)
+        case .From :FromAndToLocation(From: Constants.TitleBar.origin)
                 .navigationTitle(Constants.TitleBar.origin)
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.blue,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar) 
-        case .To  : FromAndToLocation(To: Constants.TitleBar.destination)//.environmentObject(locationViewModel)
+        case .To  : FromAndToLocation(To: Constants.TitleBar.destination)
                 .navigationTitle(Constants.TitleBar.destination)
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.blue,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
         case .OneWaySearchButton :
             
-            OneWaySearch()//.environmentObject(locationViewModel)
-               
+            OneWaySearch()
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.blue,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
               
-        case .TwoWaySearchButton : TwoWaySearch()//.environmentObject(locationViewModel)
-                
+        case .TwoWaySearchButton : TwoWaySearch()
                 .toolbarColorScheme(.dark, for: .navigationBar)
                 .toolbarBackground(Color.blue,for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)

@@ -11,13 +11,11 @@
 		03A24D4E2CAFA8A1005F2FBA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A24D4D2CAFA8A1005F2FBA /* LocationManager.swift */; };
 		03A24D502CAFB9D9005F2FBA /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A24D4F2CAFB9D9005F2FBA /* PostRequest.swift */; };
 		03A24D522CAFBF8E005F2FBA /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A24D512CAFBF8E005F2FBA /* PostModel.swift */; };
-		03A6C0BD2CA587E3003E1C5B /* ResultScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6C0BC2CA587E3003E1C5B /* ResultScreenManager.swift */; };
 		03BB98CF2CA2A2950082438A /* NavigationDestinations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB98CE2CA2A2950082438A /* NavigationDestinations.swift */; };
 		03BB98D32CA2BFA10082438A /* OneWaySearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB98D22CA2BFA10082438A /* OneWaySearchResultModel.swift */; };
 		03BF130A2CA6B09800A9EA17 /* OneWaySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF13092CA6B09800A9EA17 /* OneWaySearch.swift */; };
 		03BF130C2CA6B11900A9EA17 /* TwoWaySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF130B2CA6B11900A9EA17 /* TwoWaySearch.swift */; };
 		03BF130E2CA6B33000A9EA17 /* TwoWaySerachResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BF130D2CA6B33000A9EA17 /* TwoWaySerachResultModel.swift */; };
-		03C6A5242CA3D217000D57D9 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C6A5232CA3D217000D57D9 /* APIServices.swift */; };
 		03CCFFF52C8AEAD7001B0870 /* FareFirst_CloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CCFFF42C8AEAD7001B0870 /* FareFirst_CloneApp.swift */; };
 		03CCFFF72C8AEAD7001B0870 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CCFFF62C8AEAD7001B0870 /* ContentView.swift */; };
 		03CCFFF92C8AEAD9001B0870 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03CCFFF82C8AEAD9001B0870 /* Assets.xcassets */; };
@@ -27,7 +25,10 @@
 		03CEC18F2C9C22A8007B758E /* DateAndTraveller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CEC18E2C9C22A8007B758E /* DateAndTraveller.swift */; };
 		03CEC1932C9C2377007B758E /* FromAndToLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CEC1922C9C2377007B758E /* FromAndToLocation.swift */; };
 		03CEC1982C9C5446007B758E /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CEC1972C9C5446007B758E /* LocationModel.swift */; };
-		03D3CE912C95471D00BF05CA /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3CE902C95471D00BF05CA /* HomeScreen.swift */; };
+		03D3288F2CB0FCB1008DCC64 /* ErrorCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3288E2CB0FCB1008DCC64 /* ErrorCases.swift */; };
+		03D328932CB10621008DCC64 /* SearchResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D328922CB10621008DCC64 /* SearchResultManager.swift */; };
+		03D328982CB11093008DCC64 /* FlightViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D328972CB11093008DCC64 /* FlightViewScreen.swift */; };
+		03D3289E2CB13BE0008DCC64 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03D3289D2CB13BE0008DCC64 /* Launch Screen.storyboard */; };
 		03D687A02C8C7EF100B219E0 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D6879F2C8C7EF100B219E0 /* Trip.swift */; };
 		03DBDB872C9B00300085B727 /* FlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DBDB862C9B00300085B727 /* FlightViewModel.swift */; };
 		03FEF9EB2CAA5EB00004DA15 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FEF9EA2CAA5EB00004DA15 /* WebView.swift */; };
@@ -38,13 +39,11 @@
 		03A24D4D2CAFA8A1005F2FBA /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		03A24D4F2CAFB9D9005F2FBA /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
 		03A24D512CAFBF8E005F2FBA /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
-		03A6C0BC2CA587E3003E1C5B /* ResultScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreenManager.swift; sourceTree = "<group>"; };
 		03BB98CE2CA2A2950082438A /* NavigationDestinations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDestinations.swift; sourceTree = "<group>"; };
 		03BB98D22CA2BFA10082438A /* OneWaySearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneWaySearchResultModel.swift; sourceTree = "<group>"; };
 		03BF13092CA6B09800A9EA17 /* OneWaySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneWaySearch.swift; sourceTree = "<group>"; };
 		03BF130B2CA6B11900A9EA17 /* TwoWaySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoWaySearch.swift; sourceTree = "<group>"; };
 		03BF130D2CA6B33000A9EA17 /* TwoWaySerachResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoWaySerachResultModel.swift; sourceTree = "<group>"; };
-		03C6A5232CA3D217000D57D9 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		03CC00052C8AEAD9001B0870 /* FareFirst_CloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FareFirst_CloneTests.swift; sourceTree = "<group>"; };
 		03CC000F2C8AEAD9001B0870 /* FareFirst_CloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FareFirst_CloneUITests.swift; sourceTree = "<group>"; };
 		03CC00112C8AEAD9001B0870 /* FareFirst_CloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FareFirst_CloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -58,7 +57,11 @@
 		03CEC18E2C9C22A8007B758E /* DateAndTraveller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTraveller.swift; sourceTree = "<group>"; };
 		03CEC1922C9C2377007B758E /* FromAndToLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromAndToLocation.swift; sourceTree = "<group>"; };
 		03CEC1972C9C5446007B758E /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
-		03D3CE902C95471D00BF05CA /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		03D3288E2CB0FCB1008DCC64 /* ErrorCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCases.swift; sourceTree = "<group>"; };
+		03D328922CB10621008DCC64 /* SearchResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultManager.swift; sourceTree = "<group>"; };
+		03D328972CB11093008DCC64 /* FlightViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewScreen.swift; sourceTree = "<group>"; };
+		03D3289C2CB127DC008DCC64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		03D3289D2CB13BE0008DCC64 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		03D6879F2C8C7EF100B219E0 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		03DBDB862C9B00300085B727 /* FlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewModel.swift; sourceTree = "<group>"; };
 		03FEF9EA2CAA5EB00004DA15 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -79,6 +82,9 @@
 			isa = PBXGroup;
 			children = (
 				03A03F5D2CABC550008B15CD /* Constants.swift */,
+				03D3288E2CB0FCB1008DCC64 /* ErrorCases.swift */,
+				03BB98CE2CA2A2950082438A /* NavigationDestinations.swift */,
+				03CCFFF82C8AEAD9001B0870 /* Assets.xcassets */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -103,6 +109,7 @@
 		03CCFFE82C8AEAD7001B0870 = {
 			isa = PBXGroup;
 			children = (
+				03D3289D2CB13BE0008DCC64 /* Launch Screen.storyboard */,
 				03CCFFF32C8AEAD7001B0870 /* FareFirst-Clone */,
 				03CC00042C8AEAD9001B0870 /* FareFirst-CloneTests */,
 				03CC000E2C8AEAD9001B0870 /* FareFirst-CloneUITests */,
@@ -121,12 +128,13 @@
 		03CCFFF32C8AEAD7001B0870 /* FareFirst-Clone */ = {
 			isa = PBXGroup;
 			children = (
+				03D3289C2CB127DC008DCC64 /* Info.plist */,
 				03CCFFF42C8AEAD7001B0870 /* FareFirst_CloneApp.swift */,
+				03D328942CB10B18008DCC64 /* Post */,
 				03A03F5C2CABC50A008B15CD /* Utilities */,
 				03CEC1962C9C5270007B758E /* Model */,
 				03CEC1852C9BFB3D007B758E /* View */,
 				03DBDB852C9AFFD10085B727 /* ViewModel */,
-				03CCFFF82C8AEAD9001B0870 /* Assets.xcassets */,
 				03CCFFFA2C8AEAD9001B0870 /* Preview Content */,
 			);
 			path = "FareFirst-Clone";
@@ -143,16 +151,8 @@
 		03CEC1852C9BFB3D007B758E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				03CCFFF62C8AEAD7001B0870 /* ContentView.swift */,
-				03D3CE902C95471D00BF05CA /* HomeScreen.swift */,
-				03CEC1882C9C00DD007B758E /* PopPage.swift */,
-				03CEC18A2C9C1E93007B758E /* Location.swift */,
-				03CEC18E2C9C22A8007B758E /* DateAndTraveller.swift */,
-				03CEC1922C9C2377007B758E /* FromAndToLocation.swift */,
-				03D6879F2C8C7EF100B219E0 /* Trip.swift */,
-				03BF13092CA6B09800A9EA17 /* OneWaySearch.swift */,
-				03BF130B2CA6B11900A9EA17 /* TwoWaySearch.swift */,
-				03FEF9EA2CAA5EB00004DA15 /* WebView.swift */,
+				03D3289A2CB11853008DCC64 /* HomeScreen */,
+				03D328962CB10FD4008DCC64 /* FlightViewScreen */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,21 +161,58 @@
 			isa = PBXGroup;
 			children = (
 				03CEC1972C9C5446007B758E /* LocationModel.swift */,
-				03A24D512CAFBF8E005F2FBA /* PostModel.swift */,
 				03BB98D22CA2BFA10082438A /* OneWaySearchResultModel.swift */,
 				03BF130D2CA6B33000A9EA17 /* TwoWaySerachResultModel.swift */,
-				03BB98CE2CA2A2950082438A /* NavigationDestinations.swift */,
-				03C6A5232CA3D217000D57D9 /* APIServices.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		03D328942CB10B18008DCC64 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				03A24D4F2CAFB9D9005F2FBA /* PostRequest.swift */,
+				03A24D512CAFBF8E005F2FBA /* PostModel.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		03D328962CB10FD4008DCC64 /* FlightViewScreen */ = {
+			isa = PBXGroup;
+			children = (
+				03D328972CB11093008DCC64 /* FlightViewScreen.swift */,
+				03D6879F2C8C7EF100B219E0 /* Trip.swift */,
+				03CEC18E2C9C22A8007B758E /* DateAndTraveller.swift */,
+				03CEC18A2C9C1E93007B758E /* Location.swift */,
+				03FEF9EA2CAA5EB00004DA15 /* WebView.swift */,
+				03CEC1882C9C00DD007B758E /* PopPage.swift */,
+				03CEC1922C9C2377007B758E /* FromAndToLocation.swift */,
+				03D328992CB111CD008DCC64 /* SearchResultScreen */,
+			);
+			path = FlightViewScreen;
+			sourceTree = "<group>";
+		};
+		03D328992CB111CD008DCC64 /* SearchResultScreen */ = {
+			isa = PBXGroup;
+			children = (
+				03BF130B2CA6B11900A9EA17 /* TwoWaySearch.swift */,
+				03BF13092CA6B09800A9EA17 /* OneWaySearch.swift */,
+			);
+			path = SearchResultScreen;
+			sourceTree = "<group>";
+		};
+		03D3289A2CB11853008DCC64 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				03CCFFF62C8AEAD7001B0870 /* ContentView.swift */,
+			);
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 		03DBDB852C9AFFD10085B727 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				03DBDB862C9B00300085B727 /* FlightViewModel.swift */,
-				03A24D4F2CAFB9D9005F2FBA /* PostRequest.swift */,
-				03A6C0BC2CA587E3003E1C5B /* ResultScreenManager.swift */,
+				03D328922CB10621008DCC64 /* SearchResultManager.swift */,
 				03A24D4D2CAFA8A1005F2FBA /* LocationManager.swift */,
 			);
 			path = ViewModel;
@@ -239,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03D3289E2CB13BE0008DCC64 /* Launch Screen.storyboard in Resources */,
 				03CCFFFC2C8AEAD9001B0870 /* Preview Assets.xcassets in Resources */,
 				03CCFFF92C8AEAD9001B0870 /* Assets.xcassets in Resources */,
 			);
@@ -254,16 +292,16 @@
 				03DBDB872C9B00300085B727 /* FlightViewModel.swift in Sources */,
 				03A24D502CAFB9D9005F2FBA /* PostRequest.swift in Sources */,
 				03CEC18F2C9C22A8007B758E /* DateAndTraveller.swift in Sources */,
+				03D328982CB11093008DCC64 /* FlightViewScreen.swift in Sources */,
 				03CEC18B2C9C1E93007B758E /* Location.swift in Sources */,
+				03D328932CB10621008DCC64 /* SearchResultManager.swift in Sources */,
 				03BB98CF2CA2A2950082438A /* NavigationDestinations.swift in Sources */,
 				03BF130E2CA6B33000A9EA17 /* TwoWaySerachResultModel.swift in Sources */,
 				03CEC1982C9C5446007B758E /* LocationModel.swift in Sources */,
+				03D3288F2CB0FCB1008DCC64 /* ErrorCases.swift in Sources */,
 				03D687A02C8C7EF100B219E0 /* Trip.swift in Sources */,
 				03CCFFF72C8AEAD7001B0870 /* ContentView.swift in Sources */,
-				03A6C0BD2CA587E3003E1C5B /* ResultScreenManager.swift in Sources */,
 				03BF130C2CA6B11900A9EA17 /* TwoWaySearch.swift in Sources */,
-				03D3CE912C95471D00BF05CA /* HomeScreen.swift in Sources */,
-				03C6A5242CA3D217000D57D9 /* APIServices.swift in Sources */,
 				03A24D4E2CAFA8A1005F2FBA /* LocationManager.swift in Sources */,
 				03FEF9EB2CAA5EB00004DA15 /* WebView.swift in Sources */,
 				03CEC1932C9C2377007B758E /* FromAndToLocation.swift in Sources */,
@@ -409,10 +447,13 @@
 				DEVELOPMENT_TEAM = YC8Y6Z584P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FareFirst-Clone/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -442,10 +483,13 @@
 				DEVELOPMENT_TEAM = YC8Y6Z584P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FareFirst-Clone/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -11,7 +11,6 @@ struct PopPage: View {
     var body: some View {
         
         HStack {
-            //Spacer()
             VStack(alignment: .leading,spacing: 5) {
                 
                 Text("\(passengers)").font(.system(size: 14)).foregroundStyle(Color.gray).fontWeight(.semibold)
@@ -25,7 +24,7 @@ struct PopPage: View {
             HStack {
                 Spacer()
                 Button {
-                    if flightViewModel.totalPassengers < 10 {
+                    if flightViewModel.totalPassengers <= 9 {
                         flightViewModel.toastText = false
                     }
                     print("flight",flightViewModel.totalPassengers)
@@ -48,10 +47,11 @@ struct PopPage: View {
                 Spacer()
                 
                 Button {
-                    if flightViewModel.totalPassengers == 8 {
+                    if flightViewModel.totalPassengers >= 8 {
+                        
                         flightViewModel.toastText = true
                     }
-                 
+                    print("flightview",flightViewModel.totalPassengers)
                     plusButton()
                     
                 } label: {

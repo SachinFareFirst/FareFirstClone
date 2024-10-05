@@ -3,25 +3,25 @@ import Foundation
 import SwiftUI
 
 class FlightViewModel : ObservableObject {
-    
+
     static let shared = FlightViewModel()
-    
+    @Published var userError: UserError?
     @Published var path = NavigationPath()
     @Published var sliderValue = 0.0
     @Published var passengerClass = ["Economy", "Premium Economy","Business", "First Class" ]
     @Published var ways = ["One way", "Two way", "Multi city"]
-    @Published  var adult = 1
-    @Published  var children : Int = 0
-    @Published  var infants : Int = 0
-    @Published  var deparatureDate = Date()
-    @Published  var returnDate = Date()
+    @Published var adult = 1
+    @Published var children : Int = 0
+    @Published var infants : Int = 0
+    @Published var deparatureDate = Date()
+    @Published var returnDate = Date()
     @Published var trip : Int = 0
     @Published var fromLocation = LocationModel(cityName: "Mangalore", iataCode: "IXE", countryName: "India", mainAirportName: "Any Aiport")
     @Published var toLocation = LocationModel(cityName: "Bengaluru", iataCode: "BLR", countryName: "India", mainAirportName: "Any Aiport")
-    @Published var searchQuerry = ""
     @Published var oneWayResult  = [Results]()
     @Published var twoWayResult  = [TwoWayResult]()
     @Published var locationData : [LocationModel] = []
+    @Published var searchQuerry = ""
     @Published var isLoading = false
     @Published var homescreenSearchAlert = false    
     @Published var resultsAlert = false
@@ -32,14 +32,12 @@ class FlightViewModel : ObservableObject {
         fromLocation = toLocation
         toLocation = temp
     }
-    
-    
+
     var totalPassengers : Int {
         
         return adult+children+infants
     }
-    
-    
+
     func getCount (stringValue : String) -> Int {
         if stringValue == Constants.PopUpPage.adult {
             
@@ -95,6 +93,14 @@ class FlightViewModel : ObservableObject {
             }
         }
         return false
+    }
+    
+    func fetchLocationDetail(searchString : String) {
+        LocationManager.shared.fetchLocationDetail(searchString: searchString)
+    }
+    
+    func searchResult() {
+        SearchResultManager.shared.searchResult()
     }
     
     func alertText() -> some View {

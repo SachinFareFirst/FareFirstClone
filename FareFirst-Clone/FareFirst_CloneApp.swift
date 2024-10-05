@@ -11,10 +11,6 @@ import SwiftUI
 struct FareFirst_CloneApp: App {
     var body: some Scene {
         WindowGroup {
-//            @StateObject var flightViewModel2 : FlightViewModel = FlightViewModel()
-//           
-//            
-//            @StateObject var resultScreenManager : ResultScreenManager = ResultScreenManager()
             ContentView( )
         }
     }
