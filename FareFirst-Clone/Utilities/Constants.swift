@@ -34,8 +34,11 @@ struct Constants {
     
     struct PopUpPage {
         static let adult = "Adult"
+        static let adultAge = "Over 16 y.o"
         static let children = "Children"
+        static let childrenAge = "2-15 y.o"
         static let infant = "Infant"
+        static let infantAge = "0-2 y.o"
     }
     
     struct TitleBar {
@@ -46,9 +49,23 @@ struct Constants {
     struct UIDevice1 {
         static let platform = UIDevice.current.systemName
         static let os_version = UIDevice.current.systemVersion
+        static let app_version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         static let model = UIDevice.current.model
         static let manufacturer = "Apple"
     }
+    
+    struct Tclass {
+        static let economy = "Economy"
+        static let premium_economy = "Premium Economy"
+        static let business = "Business"
+        static let first_class = "First Class"
+    }
+    struct segmentControl {
+        static let one_way = "One way"
+        static let two_way =  "Two way"
+        static let multi_city =   "Multi city"
+    }
+    
     
     static func createUrl(endpoint : String, querryParameter : [String : Any]) -> URL? {
        var urlComponents = URLComponents()
@@ -59,6 +76,22 @@ struct Constants {
             URLQueryItem(name: key, value: String(describing: value))
         })
         return urlComponents.url
+    }
+    
+    
+    static func postUrl() -> URL? {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "marketingdata-rrfunovf4a-uc.a.run.app"
+        components.path = "/flights"
+
+        print("url in constsant",components.url)
+        return components.url
+//        if let temporaryUrl = components.url {
+//             url = temporaryUrl
+//        }
+//        return url
+        
     }
     
 }

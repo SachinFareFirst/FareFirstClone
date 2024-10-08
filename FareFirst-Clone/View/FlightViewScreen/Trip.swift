@@ -31,7 +31,6 @@ struct Trip: View {
             }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
                 .background(Capsule()
                     .stroke(Color.white, lineWidth:1))
-            
         }
     }
 }

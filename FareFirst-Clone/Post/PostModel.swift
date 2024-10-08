@@ -1,9 +1,3 @@
-//
-//  PostModel.swift
-//  FareFirst-Clone
-//
-//  Created by Sachin H K on 04/10/24.
-//
 
 import Foundation
 
@@ -36,9 +30,7 @@ struct Device : Codable {
     let platform : String
     let os_version : String
     let app_version : String
-    let app_version_code : String
     let push_token : String
     let model : String
-    let manufacturer : String
-    let model_code : String
+   
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 final class LocationManager {
+    
     static var shared = LocationManager()
     private var flightViewModel = FlightViewModel.shared
 

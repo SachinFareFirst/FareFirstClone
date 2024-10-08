@@ -20,6 +20,7 @@ class SearchResultManager {
         let  departureDate = "\(year)-\(month)-\(day)"
         return departureDate
     }
+    
     var returnDate : String {
         let day =  flightViewModel.returnDate.formatted(.dateTime.day(.twoDigits))
         let month =  flightViewModel.returnDate.formatted(.dateTime.month(.twoDigits ))
@@ -79,11 +80,9 @@ class SearchResultManager {
                     print("got somne ee")
                     return
                 }
-                print("intermnediate")
                 if let safeData = data {
                     
                     if self.flightViewModel.trip == 0 {
-                        print(String(data: safeData, encoding: .utf8)!)
                         self.oneWayNullCheck(safeData: safeData)
                     }
                     else {

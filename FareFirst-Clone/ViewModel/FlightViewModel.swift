@@ -8,8 +8,8 @@ class FlightViewModel : ObservableObject {
     @Published var userError: UserError?
     @Published var path = NavigationPath()
     @Published var sliderValue = 0.0
-    @Published var passengerClass = ["Economy", "Premium Economy","Business", "First Class" ]
-    @Published var ways = ["One way", "Two way", "Multi city"]
+    @Published var passengerClass = [Constants.Tclass.economy,Constants.Tclass.premium_economy,Constants.Tclass.business,Constants.Tclass.first_class ]
+    @Published var ways = [Constants.segmentControl.one_way,Constants.segmentControl.two_way,Constants.segmentControl.multi_city]
     @Published var adult = 1
     @Published var children : Int = 0
     @Published var infants : Int = 0

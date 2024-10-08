@@ -27,7 +27,6 @@ struct PopPage: View {
                     if flightViewModel.totalPassengers <= 9 {
                         flightViewModel.toastText = false
                     }
-                    print("flight",flightViewModel.totalPassengers)
                     minusButton()
                 } label: {
                     Image(systemName: Constants.Images.minus_sign
@@ -94,7 +93,6 @@ struct PopPage: View {
         if passengers == Constants.PopUpPage.adult{
             flightViewModel.adult -= 1
             if flightViewModel.infants >= flightViewModel.adult{
-                //print("gg",flightViewModel.infants)
                 flightViewModel.infants -= 1
             }
         }

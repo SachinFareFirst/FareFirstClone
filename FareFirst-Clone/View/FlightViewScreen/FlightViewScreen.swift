@@ -74,9 +74,9 @@ struct FlightViewScreen : View {
                         .fontWeight(.heavy)
                         .foregroundStyle(Color.gray)
                         .padding(.top,20)
-                    PopPage(passengers: Constants.PopUpPage.adult, year: "Over 16 y.o")
-                    PopPage(passengers: Constants.PopUpPage.children, year: " 2-15 y.o")
-                    PopPage(passengers: Constants.PopUpPage.infant, year: "0-2 y.o")
+                    PopPage(passengers: Constants.PopUpPage.adult, year: Constants.PopUpPage.adultAge)
+                    PopPage(passengers: Constants.PopUpPage.children, year: Constants.PopUpPage.childrenAge)
+                    PopPage(passengers: Constants.PopUpPage.infant, year: Constants.PopUpPage.infantAge)
                     
                     Text("passengers cannot be more than 9")
                         .foregroundStyle(.red)

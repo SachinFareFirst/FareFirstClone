@@ -25,7 +25,7 @@ struct ContentView: View {
                     }
             }
             .tabItem {
-                Text("Flights\(flightViewModel.path.count)")
+                Text("Flights")
                 Image(systemName: Constants.Images.airplane)
             }.tag("Flights")
             
